@@ -17,8 +17,7 @@ def get_cards(deck, n):
         cards.append(card)
     return deck, cards
 
-def test(c1, c2, num_others):
-    deck = [(c + s) for c in CARDS for s in SUITS]
+def test(c1, c2, num_others, deck):
     deck.remove(c1)
     deck.remove(c2)
 
@@ -47,19 +46,21 @@ if __name__ == "__main__":
     c2 = input("Card 2: ")
     c3 = input("How many other players will there be? ")
 
+    deck = [(c + s) for c in CARDS for s in SUITS]
+
     sim_size = input("How many simulations would you like to run? ")
 
     win = 0
     lose = 0
 
     for _ in range(int(sim_size)):
-        result = test(c1, c2, int(c3))
+        result = test(c1, c2, int(c3), deck)
         if result:
             win += 1
         else:
             lose += 1
 
     print(f"Your cards: {c1}, {c2}")
-    print(f"Other opponents: {c2}")
+    print(f"Other opponents: {c3}")
     print(f"Simulation size: {sim_size}")
     print(f"Win chance: {round((win / (win + lose)) * 100, 2)}%")
